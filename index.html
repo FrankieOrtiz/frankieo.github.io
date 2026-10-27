@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head><link rel="shortcut icon" href="img/website.ico">
+    <meta name="Frankie" content="862661289">
+    <meta charset="UTF-8" />
+    <meta name="description" content="Put your site description here">
+    <title>Frankie Ortiz - Business Administration</title>    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style>
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/test.jpg" alt="Profile Picture"
+        body { margin: 0; }
+    </style>
+    <p class="lead mb-4">I'm so cool bro like super super super cool<br><br>
+I love Jimin from BTS<br><br>
+Yoongi Marry Me
+<div class="social-icons">
+<a target="_blank" id="socialicon-1" href="https://linkedin.com/yourprofile">
+    <i class="fab fa-linkedin-in"></i>
+</a>
+<a target="_blank" id="socialicon-2" href="https://github.com/yourUsername">
+    <i class="fab fa-github"></i>
+</a>
+<a target="_blank" id="socialicon-3" href="https://twitter.com/yourtwitteroryourfavoritetwitter">
+    <i class="fab fa-twitter"></i>
+</a>
+<a target="_blank" id="socialicon-4" href="mailto:youremail@gmail.com">
+    <i class="fa fa-envelope"></i>
+</a>
+<h2 class="mb-5">Experience</h2>
+    <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5 experience">
+        <div class="resume-content">
+            <h3 class="mb-0">Developer</h3>
+                <div class="subheading mb-3"><a target="_blank" href="Enter URL Here">Company</a></div>
+            <p>
+             • Developed websites for company X<br>
+             • Speaker at hack-a-thons<br>
+             • Experience with HTML, CSS, Javascript, Photoshop<br>
+            </p>
+            </div>
+            <div class="resume-date text-md-right">
+                <span class="text-primary">March 2019 - Present</span>
+            </div>
+        </div>
+        <h2 class="mb-5">Education</h2>
+<div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5 education">
+    <div class="resume-content">
+        <h3 class="mb-0">UC Riverside</h3>
+        <div class="subheading mb-3">Masters of Business Administration</div>
+        <div>MBA in International Business</div>
+    </div>
+    <div class="resume-date text-md-right">
+        <span class="text-primary">August 2018 - December 2019</span>
+    </div>
+</div>
+</p>
+<h2 class="mb-5">Portfolio</h1>
+<center>
+    <img src="img/image1.jpeg" width="500px">
+    <img src="img/image2.jpeg" width="500px"><br>
+    <img src="img/image3.jpeg" width="500px">
+    <img src="img/image4.jpeg" width="500px"><br>
+</center>
+</head>
+<body>
+    <script>
+        var config = {
+            var platforms;
+            var player;
+            var cursors;
+            var stars;
+            var score = 0;
+var scoreText = this.add.text(16, 16, 'Score: 0', {
+    fontSize: '32px',
+    fill: '#000'
+});
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var game = new Phaser.Game(config);
+
+function preload() {this.load.image('sky', 'assets/sky.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+}
+
+function create(stars = this.physics.add.group({
+    key: 'star',
+    repeat: 11,
+    setXY: { x: 12, y: 0, stepX: 70 }
+});
+
+stars.children.iterate(function (child) {
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+});
+
+this.physics.add.collider(stars, platforms);
+this.physics.add.overlap(player, stars, collectStar, null, this);cursors = this.input.keyboard.createCursorKeys();player = this.physics.add.sprite(100, 450, 'dude');
+player.setBounce(0.2);
+player.setCollideWorldBounds(true);
+player.body.setGravityY(300);
+
+this.anims.create(function collectStar(player, star) {
+    star.disableBody(true, true);
+}{
+    key: 'left',
+    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+});
+
+this.anims.create({
+    key: 'turn',
+    frames: [{ key: 'dude', frame: 4 }],
+    frameRate: 20
+});
+
+this.anims.create({
+    key: 'right',
+    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+    frameRate: 10,
+    repeat: -1
+}); {
+    this.add.image(400, 300, 'sky');
+
+    platforms = this.physics.add.staticGroup();
+
+    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(600, 400, 'ground');
+    platforms.create(50, 250, 'ground');
+    platforms.create(750, 220, 'ground');
+}
+player.body.setGravityY(300);
+this.physics.add.collider(player, platforms);
+function update() {
+    if (cursors.left.isDown) {
+        player.setVelocityX(-160);
+        player.anims.play('left', true);
+    } else if (cursors.right.isDown) {
+        player.setVelocityX(160);
+        player.anims.play('right', true);
+    } else {
+        player.setVelocityX(0);
+        player.anims.play('turn');
+    }
+
+    if (cursors.up.isDown && player.body.touching.down) {
+        player.setVelocityY(-330);
+    }
+}
+
+function collectStar(player, star) {
+    star.disableBody(true, true);
+    score += 10;
+    scoreText.setText('Score: ' + score);
+}
+
+    </script>
+</body>
+</html>
